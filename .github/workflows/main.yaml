@@ -27,6 +27,7 @@ jobs:
           name: Gagandeep
           greetings: "hi"
       - name: step2 for testing
+        if: github.event_name == 'push'
         run: |
           cat /etc/os-release
           sleep 5
@@ -34,8 +35,9 @@ jobs:
           echo "$greetings ! from $name"
           touch /tmp/gagandeep1
           
-## Name is not important in a step
-      - run: uname -a
+## Name is not important in a step 
+    if: ${{ RUNNER.OS }} == 'LINUX' 
+      - run:uname -a
   test:
     runs-on: ubuntu-latest
     #continue-on-error: true
