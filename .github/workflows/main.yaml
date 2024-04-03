@@ -4,6 +4,7 @@ name: workflow1
 on: 
   workflow_dispatch:
   push:
+  pull_request:
 env:
    greetings: "Good Morning"
    name: "Mark"
