@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: dev
-    if: github.event_name == 'pull_request'
+    #if: github.event_name == 'pull_request'
     env:
       greetings: "hello"
     steps: 
@@ -39,7 +39,7 @@ jobs:
           
 ## Name is not important in a step 
       - name: step3 for checking
-        if: runner.os != 'Linux' 
+        #if: runner.os != 'Linux' 
         run: uname -a
         
   test:
