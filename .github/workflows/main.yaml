@@ -39,7 +39,7 @@ jobs:
           
 ## Name is not important in a step 
       - name: step3 for checking
-        #if: runner.os != 'Linux' 
+        if: runner.os != 'Linux' 
         run: uname -a
         
   test:
