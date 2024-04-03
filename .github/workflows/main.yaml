@@ -48,10 +48,10 @@ jobs:
        continue-on-error: true
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
-          ech " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
+          echo " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
           sleep 10 
      - name: step2
-       run: ech "Good morning"
+       run: echo "Good morning"
       
   stage:
     runs-on: ubuntu-latest
@@ -90,7 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     needs: deploy
-    #if: ${{ always() }}
+    if: ${{ always() }}
     steps: 
      - name: Notification mail
        run: echo echo build run status 
