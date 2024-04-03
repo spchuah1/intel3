@@ -36,7 +36,7 @@ jobs:
           touch /tmp/gagandeep1
           
 ## Name is not important in a step 
-    if: ${{ RUNNER.OS }} == 'LINUX' 
+    if: RUNNER.OS == 'LINUX' 
       - run:uname -a
   test:
     runs-on: ubuntu-latest
