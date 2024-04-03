@@ -58,7 +58,9 @@ jobs:
           sleep 10 
      - name: step2
        run: echo "Good morning"
-      
+     - name: debug step
+       if: ${{ failure() }}
+       run: echo "Debugging steps"
   stage:
     runs-on: ubuntu-latest
     environment: prod
