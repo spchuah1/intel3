@@ -27,7 +27,7 @@ jobs:
           name: Gagandeep
           greetings: "hi"
       - name: step2 for testing
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' 
         run: |
           cat /etc/os-release
           sleep 5
