@@ -4,6 +4,7 @@ name: workflow1
 on: 
   workflow_dispatch:
   push:
+  pull_request:
 env:
    greetings: "Good Morning"
    name: "Mark"
@@ -12,8 +13,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-   
     environment: dev
+    #if: github.event_name == 'pull_request'
     env:
       greetings: "hello"
     steps: 
@@ -27,7 +28,8 @@ jobs:
           name: Gagandeep
           greetings: "hi"
       - name: step2 for testing
-        if: github.event_name == 'push' 
+        #if: github.event_name == 'push'
+        if: runner.os == 'Linux' 
         run: |
           cat /etc/os-release
           sleep 5
@@ -36,8 +38,10 @@ jobs:
           touch /tmp/gagandeep1
           
 ## Name is not important in a step 
-    #if: RUNNER.OS == 'LINUX' 
-      - run: uname -a
+      - name: step3 for checking
+        #if: runner.os != 'Linux' 
+        run: uname -a
+        
   test:
     runs-on: ubuntu-latest
     #continue-on-error: true
@@ -47,14 +51,17 @@ jobs:
       lastname: "singh"
     steps: 
      - name: step1
-       continue-on-error: true
+       #continue-on-error: true
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
           echo " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
           sleep 10 
      - name: step2
+       id: step2
        run: echo "Good morning"
-      
+     - name: debug step
+       if: ${{ failure() && steps.steps.conclusion == 'failure' }}
+       run: echo "Debugging steps"
   stage:
     runs-on: ubuntu-latest
     environment: prod
@@ -92,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     needs: deploy
-    if: ${{ always() }}
+    #if: ${{ always() }}
     steps: 
      - name: Notification mail
        run: echo echo build run status 
