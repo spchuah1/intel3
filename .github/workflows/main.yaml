@@ -51,15 +51,16 @@ jobs:
       lastname: "singh"
     steps: 
      - name: step1
-       continue-on-error: true
+       #continue-on-error: true
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
           echo " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
           sleep 10 
      - name: step2
+       id: step2
        run: echo "Good morning"
      - name: debug step
-       if: ${{ failure() }}
+       if: ${{ failure() && steps.steps.conclusion == 'failure' }}
        run: echo "Debugging steps"
   stage:
     runs-on: ubuntu-latest
