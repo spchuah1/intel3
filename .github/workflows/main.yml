@@ -52,7 +52,7 @@ jobs:
   stage:
     runs-on: ubuntu-latest
     environment: prod
-    needs: test
+    needs: deploy
     env:
       lastname: "singh"
     steps: 
@@ -64,7 +64,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: prod
-    needs: test
+    needs: stage
     env:
       lastname: "singh"
     steps: 
@@ -82,4 +82,12 @@ jobs:
           hostname
           echo "$greetings ! from $name"
           touch /tmp/gagandeep1
+  notify:
+    runs-on: ubuntu-latest
+    environment: prod
+    needs: deploy
+    #if: ${{ always() }}
+    steps: 
+     - name: Notification mail
+       run: echo echo build run status 
         
