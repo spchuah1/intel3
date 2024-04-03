@@ -13,8 +13,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-   
     environment: dev
+    if: github.event_name == 'pull'
     env:
       greetings: "hello"
     steps: 
