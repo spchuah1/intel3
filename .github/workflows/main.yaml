@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     needs: deploy
-    if: ${{ always() }}
+    #if: ${{ always() }}
     steps: 
      - name: Notification mail
        run: echo echo build run status 
