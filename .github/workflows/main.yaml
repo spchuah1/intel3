@@ -100,6 +100,7 @@ jobs:
     environment: prod
     needs: deploy
     #if: ${{ always() }}
+    if: ${{ cancelled() }}
     steps: 
      - name: Notification mail
        run: echo echo build run status 
